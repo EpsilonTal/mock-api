@@ -1,80 +1,64 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
-	//smtesting "github.tools.sap/atom-cfs/service-management/testing"
-
 )
 
-func main(){
+func main() {
 	http.HandleFunc("/", handler)
-	log.Fatal(http.ListenAndServe(":1111",nil))
+	log.Fatal(http.ListenAndServe(":1111", nil))
 }
 
-func handler(w http.ResponseWriter, r *http.Request){
+func handler(w http.ResponseWriter, r *http.Request) {
+	fail := r.URL.Query().Get("fail")
+
 	switch r.Method {
 	case "GET":
-		fmt.Fprintf(w, "Hello")
+		fmt.Print(w, "Fake Callback Application")
 	case "POST":
-		callbackProvision(w,r)
-		fmt.Printf("done")
+		handleProvision(w, r, fail)
 	case "DELETE":
-		callbackDeprovision(r)
-	case "DEFAULT":
-		fmt.Fprintf(w, "default")
+		handleDeprovision(w, r, fail)
 	}
 	return
 }
 
-func callbackProvision(w http.ResponseWriter, r *http.Request) *http.Response {
-	w.Header().Set("Content-Type", "application/json")
-	var message *string = nil
-	//var newsList = make([]News, 0)
-	if err := json.NewDecoder(r.Body).Decode(&message); err != nil{
-	return &http.Response{
-		Status: "Bad request",
-		StatusCode: 400,
-		Proto:         "HTTP/1.1",
-		ProtoMajor:    1,
-		ProtoMinor:    1,
-		Body: nil,
-		ContentLength: 0,
-		Header: make(http.Header, 0),
-	}}
-
-	return &http.Response{
-		Status: "200 OK",
-		StatusCode: 200,
-		Proto:         "HTTP/1.1",
-		ProtoMajor:    1,
-		ProtoMinor:    1,
-		Body: nil,
-		ContentLength: 0,
-		Header: make(http.Header, 0),
+func handleProvision(w http.ResponseWriter, r *http.Request, fail string) {
+	if fail == "true" {
+		w = generateResponse(w, 400, nil)
+		return
 	}
+
+	body := []byte("{\"accessUrl\": \"accessUrl.com\",\"metadata\": {\"key1\": \"value1\",\"key2\": \"value2\"}}")
+	w = generateResponse(w, 201, body)
 }
 
-func callbackDeprovision(r *http.Request) *http.Response {
+func handleDeprovision(w http.ResponseWriter, r *http.Request, fail string) {
+	valid := validateDeprovisionRequest(r, fail)
+	if !valid {
+		w = generateResponse(w, 410, nil)
+		return
+	}
+
+	w = generateResponse(w, 200, nil)
+}
+
+func validateDeprovisionRequest(r *http.Request, fail string) bool {
 	name := r.URL.Query().Get("name")
 	namespace := r.URL.Query().Get("namespace")
 	uid := r.URL.Query().Get("uid")
-	if len(name) < 1 || len(namespace) < 1 || len(uid) == 0{
-		return &http.Response{
-			Status: "Bad request",
-			StatusCode: 400,
-			Proto:         "HTTP/1.1",
-			ProtoMajor:    1,
-			ProtoMinor:    1,
-			Body: nil,
-			ContentLength: 0,
-			Header: make(http.Header, 0),
-		}
-		//need to delete the resource instance by the name
+
+	if fail == "true" || len(name) == 0 || len(namespace) == 0 || len(uid) == 0 {
+		return false
 	}
+	return true
+}
 
-
-	return nil
+func generateResponse(w http.ResponseWriter, statusCode int, body []byte) http.ResponseWriter {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(statusCode)
+	w.Write(body)
+	return w
 }
