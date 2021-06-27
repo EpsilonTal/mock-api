@@ -16,7 +16,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	switch r.Method {
 	case "GET":
-		fmt.Print(w, "Fake Callback Application")
+		fmt.Fprintf(w, "Fake Callback Application")
 	case "POST":
 		handleProvision(w, fail)
 	case "DELETE":
