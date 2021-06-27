@@ -21,8 +21,8 @@ spec:
             - --metrics-addr=127.0.0.1:8080
           command:
             - /app/main
-          image: #### image here ####
-          imagePullPolicy: Always
+          image: callback-e2e:v0.1.0
+          imagePullPolicy: IfNotPresent
           name: server
           ports:
             - containerPort: 9443
