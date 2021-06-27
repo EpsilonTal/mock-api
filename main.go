@@ -18,14 +18,14 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	case "GET":
 		fmt.Print(w, "Fake Callback Application")
 	case "POST":
-		handleProvision(w, r, fail)
+		handleProvision(w, fail)
 	case "DELETE":
-		handleDeprovision(w, r, fail)
+		handleDeprovision(w, fail)
 	}
 	return
 }
 
-func handleProvision(w http.ResponseWriter, r *http.Request, fail string) {
+func handleProvision(w http.ResponseWriter, fail string) {
 	if fail == "true" {
 		w = generateResponse(w, 400, nil)
 		return
@@ -35,25 +35,13 @@ func handleProvision(w http.ResponseWriter, r *http.Request, fail string) {
 	w = generateResponse(w, 201, body)
 }
 
-func handleDeprovision(w http.ResponseWriter, r *http.Request, fail string) {
-	valid := validateDeprovisionRequest(r, fail)
-	if !valid {
+func handleDeprovision(w http.ResponseWriter, fail string) {
+	if fail == "true" {
 		w = generateResponse(w, 410, nil)
 		return
 	}
 
 	w = generateResponse(w, 200, nil)
-}
-
-func validateDeprovisionRequest(r *http.Request, fail string) bool {
-	name := r.URL.Query().Get("name")
-	namespace := r.URL.Query().Get("namespace")
-	uid := r.URL.Query().Get("uid")
-
-	if fail == "true" || len(name) == 0 || len(namespace) == 0 || len(uid) == 0 {
-		return false
-	}
-	return true
 }
 
 func generateResponse(w http.ResponseWriter, statusCode int, body []byte) http.ResponseWriter {
