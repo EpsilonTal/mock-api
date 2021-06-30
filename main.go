@@ -8,7 +8,7 @@ import (
 
 func main() {
 	log.Printf("starting mock server")
-	http.HandleFunc("/v1/provision", handler)
+	http.HandleFunc("/", handler)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 

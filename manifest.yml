@@ -1,0 +1,4 @@
+---
+applications:
+  - name: sm-fake-callback-client
+    memory: 100M

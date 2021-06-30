@@ -1,8 +1,0 @@
-apiVersion: resources.cloud.sap.com/v1alpha1
-kind: ResourceInstance
-metadata:
-  name: resourceinstance-sample-1
-spec:
-  resource:
-    name: managedresource-sample-1
-    namespace: default
