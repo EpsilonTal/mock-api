@@ -1,4 +1,4 @@
-module github.tools.sap/sm-fake-callback-client
+module github.tools.sap/mock-api-app
 
 go 1.16
 
