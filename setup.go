@@ -11,11 +11,11 @@ import (
 
 func setup(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
-	case "GET":
-		getTest(w, r)
-		return
 	case "POST":
 		createTest(w, r)
+		return
+	case "GET":
+		getTest(w, r)
 		return
 	case "DELETE":
 		deleteTest(w, r)

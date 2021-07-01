@@ -7,10 +7,10 @@ import (
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
-	case "GET":
-		fmt.Fprintf(w, "Fake Callback Application")
 	case "POST":
 		handlePost(w, r)
+	case "GET":
+		fmt.Fprintf(w, "Fake Callback Application")
 	case "DELETE":
 		handleDelete(w, r)
 	}
