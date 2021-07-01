@@ -35,7 +35,7 @@ func createTest(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Unmarshal
-	var reqTestSettings mockConfig
+	var reqTestSettings MockConfig
 	err = json.Unmarshal(b, &reqTestSettings)
 	if err != nil {
 		http.Error(w, err.Error(), 500)
@@ -43,7 +43,7 @@ func createTest(w http.ResponseWriter, r *http.Request) {
 	}
 
 	mutex.Lock()
-	settings := &mockConfig{
+	settings := &MockConfig{
 		ID:                   testUUID,
 		PostResponseStatus:   gjson.GetBytes(b, postResponseStatus).Int(),
 		PostResponseBody:     gjson.GetBytes(b, postResponseBody).Value(),
@@ -67,7 +67,7 @@ func getTest(w http.ResponseWriter, r *http.Request) {
 func deleteTest(w http.ResponseWriter, r *http.Request) {
 	deleteAll := r.URL.Query().Get(deleteAllKey)
 	if deleteAll == "true" {
-		tests = make(map[string]*mockConfig)
+		tests = make(map[string]*MockConfig)
 	} else {
 		testUUID := r.URL.Query().Get(idKey)
 		delete(tests, testUUID)

@@ -1,6 +1,6 @@
 package main
 
-type mockConfig struct {
+type MockConfig struct {
 	ID                   string      `json:"id"`
 	PostResponseStatus   int64       `json:"postResponseStatus"`
 	PostResponseBody     interface{} `json:"postResponseBody"`

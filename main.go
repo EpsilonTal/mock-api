@@ -7,18 +7,18 @@ import (
 )
 
 var (
-	tests map[string]*mockConfig
+	tests map[string]*MockConfig
 	mutex *sync.Mutex
 )
 
 func main() {
-	tests = make(map[string]*mockConfig)
+	tests = make(map[string]*MockConfig)
 	mutex = &sync.Mutex{}
 	log.Printf("starting mock server")
 
 	/*
 		POST:
-		 Create a new test configuration, using mockConfig struct
+		 Create a new test configuration, using MockConfig struct
 		 Response will contain the ID of the test config
 		DELETE:
 		 Optional flags:
