@@ -2,6 +2,19 @@
 Rest API mocking and intercepting in seconds.
 Replace the endpoint in the code and you are ready. It's that simple!
 
+- [Mock API](#mock-api)
+    * [Installation and Setup](#installation-and-setup)
+    * [Build A Mock API](#build-a-mock-api)
+        + [Request](#request)
+        + [Response](#response)
+            - [Created 201](#created-201)
+    * [Delete A Mock API](#delete-a-mock-api)
+        + [Request](#request-1)
+        + [Response](#response-1)
+    * [How to use](#how-to-use)
+        + [Post Request](#post-request)
+        + [Post Response](#post-response)
+    
 ## Installation and Setup
 - Clone the project
 - Import and Sync go.mod dependencies
