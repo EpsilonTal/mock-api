@@ -16,8 +16,8 @@ Replace the endpoint in the code and you are ready. It's that simple!
         + [Post Response](#post-response)
     
 ## Installation and Setup
-- Clone the project
-- Import and Sync go.mod dependencies
+1. Clone the project
+2. Import and Sync go.mod dependencies
 
 The project contains a manifest.yaml file for cloud-foundry users.
 1. Login to your cloud-foundry org and space.
@@ -25,7 +25,7 @@ The project contains a manifest.yaml file for cloud-foundry users.
 
 ## Build A Mock API
 
-After uploading the application to the cloud, you can setup a new mock api.
+When your mock-api application is running, you can start using it and set up a new config.
 
 ### Request
 `POST` request to `https://<host>/mockConfig`
