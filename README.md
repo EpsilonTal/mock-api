@@ -39,9 +39,9 @@ The request body should contain the following JSON template:
     }
 }
 ```
-`postResponseStatus` - (int64) the expected response status of your `post` requests
-`deleteResponseStatus` - (int64)  the expected response status of your `delete` requests
-`postResponseBody` - the expected response body of your `post` requests (can be a json format)
+- `postResponseStatus` - (int64) the expected response status of your `post` requests
+- `deleteResponseStatus` - (int64)  the expected response status of your `delete` requests
+- `postResponseBody` - the expected response body of your `post` requests (can be a json format)
 
 ### Response
 
@@ -56,13 +56,13 @@ The request body should contain the following JSON template:
     "deleteResponseStatus": 200
 }
 ```
-`id` - (uuid) the unique id of your config, will be used for mocking your requests to the client and for setup/delete
-`postResponseStatus` - (int64) the expected response status of your `post` requests
-`deleteResponseStatus` - (int64)  the expected response status of your `delete` requests
-`postResponseBody` - the expected response body of your `post` requests (can be a json format)
+- `id` - (uuid) the unique id of your config, will be used for mocking your requests to the client and for setup/delete
+- `postResponseStatus` - (int64) the expected response status of your `post` requests
+- `deleteResponseStatus` - (int64)  the expected response status of your `delete` requests
+- `postResponseBody` - the expected response body of your `post` requests (can be a json format)
 
 ## Delete A Mock API
-When finishing with the mock api config, remember to delete it in order to avoid overloading your application inmemory.
+When finishing with the mock api config, remember to delete it in order to avoid overloading your application in-memory.
 
 ### Request
 `DELETE` request to `https://<host>/mockConfig?id=<uuid>`
@@ -71,27 +71,20 @@ When finishing with the mock api config, remember to delete it in order to avoid
 ### Response
 `OK 200` on success
 
-## How to use
+## How to use your mock config
 
 ### Post Request
-`POST` request to `https://<host>/?id=<uuid>`
-`id` - (uuid) the unique id of your config, which recieved on the `Build A Mock API` step
+- `POST` request to `https://<host>/?id=<uuid>`
+- `id` - (uuid) the unique id of your config, which recieved on the `Build A Mock API` step
 
 ### Post Response
-`Status Code`: should be as defined eralier.
-The request body should contain the `postResponseBody` defined earlier:
+- `Status Code`: should be as defined eralier.
+- The request body should contain the `postResponseBody` defined earlier:
 ```json
 {
     "name": "tal.yaakov@sap.com"
 }
 ```
 ### Delete Request
-`POST` request to `https://<host>/?id=<uuid>`
-`id` - (uuid) the unique id of your config, which recieved on the `Build A Mock API` step
-
-The request body should contain the `postResponseBody` defined earlier:
-```json
-{
-    "name": "tal.yaakov@sap.com"
-}
-```
+- `DELETE` request to `https://<host>/?id=<uuid>`
+- `id` - (uuid) the unique id of your config, which recieved on the `Build A Mock API` step.
