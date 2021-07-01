@@ -6,4 +6,3 @@ type MockConfig struct {
 	PostResponseBody     interface{} `json:"postResponseBody"`
 	DeleteResponseStatus int64       `json:"deleteResponseStatus"`
 }
-
