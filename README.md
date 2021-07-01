@@ -61,12 +61,33 @@ The request body should contain the following JSON template:
 - `deleteResponseStatus` - (int64)  the expected response status of your `delete` requests
 - `postResponseBody` - the expected response body of your `post` requests (can be a json format)
 
-## Delete A Mock API
+## Get a Mock API config
+
+### Request
+`GET` request to `https://<host>/mockConfig?id=<uuid>`
+`uuid` - is the unique id of your mock config
+
+**NOTE!**
+
+You can get all configurations in your app memory using the `all=true` flag.
+
+Example:
+`GET` request to `https://<host>/mockConfig?all=true`
+
+
+## Delete A Mock API config
 When finishing with the mock api config, remember to delete it in order to avoid overloading your application in-memory.
 
 ### Request
 `DELETE` request to `https://<host>/mockConfig?id=<uuid>`
 `uuid` - is the unique id of your mock config
+
+**NOTE!**
+
+You can delete all configurations in your app memory using the `all=true` flag.
+
+Example:
+`DELETE` request to `https://<host>/mockConfig?all=true`
 
 ### Response
 `OK 200` on success
