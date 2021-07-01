@@ -1,18 +1,19 @@
 package main
 
 import (
+	"github.tools.sap/atom-cfs/mock-api-app/utils"
 	"log"
 	"net/http"
 	"sync"
 )
 
 var (
-	tests map[string]*MockConfig
+	tests map[string]*utils.MockConfig
 	mutex *sync.Mutex
 )
 
 func main() {
-	tests = make(map[string]*MockConfig)
+	tests = make(map[string]*utils.MockConfig)
 	mutex = &sync.Mutex{}
 	log.Printf("starting mock server")
 

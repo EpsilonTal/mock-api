@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"github.com/google/uuid"
 	"github.com/tidwall/gjson"
+	"github.tools.sap/atom-cfs/mock-api-app/utils"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -35,7 +36,7 @@ func createTest(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Unmarshal
-	var reqTestSettings MockConfig
+	var reqTestSettings utils.MockConfig
 	err = json.Unmarshal(b, &reqTestSettings)
 	if err != nil {
 		http.Error(w, err.Error(), 500)
@@ -43,7 +44,7 @@ func createTest(w http.ResponseWriter, r *http.Request) {
 	}
 
 	mutex.Lock()
-	settings := &MockConfig{
+	settings := &utils.MockConfig{
 		ID:                   testUUID,
 		PostResponseStatus:   gjson.GetBytes(b, PostResponseStatusKey).Int(),
 		PostResponseBody:     gjson.GetBytes(b, PostResponseBodyKey).Value(),
@@ -67,7 +68,7 @@ func getTest(w http.ResponseWriter, r *http.Request) {
 func deleteTest(w http.ResponseWriter, r *http.Request) {
 	deleteAll := r.URL.Query().Get(deleteAllKey)
 	if deleteAll == "true" {
-		tests = make(map[string]*MockConfig)
+		tests = make(map[string]*utils.MockConfig)
 	} else {
 		testUUID := r.URL.Query().Get(idKey)
 		delete(tests, testUUID)
