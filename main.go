@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.tools.sap/atom-cfs/mock-api-app/utils"
+	"github.tools.sap/atom-cfs/mock-api/utils"
 	"log"
 	"net/http"
 	"sync"
@@ -26,7 +26,7 @@ func main() {
 			* all=true: delete all test configurations
 			* id=uuid: delete single test configuration
 	*/
-	http.HandleFunc("/setup", setup)
+	http.HandleFunc("/mockConfig", setup)
 
 	/*
 		Mandatory flag:

@@ -1,4 +1,4 @@
-package main
+package utils
 
 import (
 	"encoding/json"
@@ -9,11 +9,11 @@ const (
 	PostResponseStatusKey   = "postResponseStatus"
 	PostResponseBodyKey     = "postResponseBody"
 	DeleteResponseStatusKey = "deleteResponseStatus"
-	idKey                   = "id"
-	deleteAllKey            = "all"
+	IDKey                   = "id"
+	AllKey                  = "all"
 )
 
-func generateResponse(w http.ResponseWriter, statusCode int, object interface{}) http.ResponseWriter {
+func GenerateResponse(w http.ResponseWriter, statusCode int, object interface{}) http.ResponseWriter {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(statusCode)
 	marshal, _ := json.Marshal(object)

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.tools.sap/atom-cfs/mock-api/utils"
 	"net/http"
 )
 
@@ -18,11 +19,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func handlePost(w http.ResponseWriter, r *http.Request) {
-	testUUID := r.URL.Query().Get(idKey)
-	w = generateResponse(w, int(tests[testUUID].PostResponseStatus), tests[testUUID].PostResponseBody)
+	testUUID := r.URL.Query().Get(utils.IDKey)
+	w = utils.GenerateResponse(w, int(tests[testUUID].PostResponseStatus), tests[testUUID].PostResponseBody)
 }
 
 func handleDelete(w http.ResponseWriter, r *http.Request) {
-	testUUID := r.URL.Query().Get(idKey)
-	w = generateResponse(w, int(tests[testUUID].DeleteResponseStatus), nil)
+	testUUID := r.URL.Query().Get(utils.IDKey)
+	w = utils.GenerateResponse(w, int(tests[testUUID].DeleteResponseStatus), nil)
 }
