@@ -1,4 +1,4 @@
-module github.tools.sap/mock-api-app
+module github.tools.sap/atom-cfs/mock-api-app
 
 go 1.16
 
