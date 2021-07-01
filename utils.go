@@ -6,11 +6,11 @@ import (
 )
 
 const (
-	postResponseStatus   = "postResponseStatus"
-	postResponseBody     = "postResponseBody"
-	deleteResponseStatus = "deleteResponseStatus"
-	idKey                = "id"
-	deleteAllKey         = "all"
+	PostResponseStatusKey   = "postResponseStatus"
+	PostResponseBodyKey     = "postResponseBody"
+	DeleteResponseStatusKey = "deleteResponseStatus"
+	idKey                   = "id"
+	deleteAllKey            = "all"
 )
 
 func generateResponse(w http.ResponseWriter, statusCode int, object interface{}) http.ResponseWriter {

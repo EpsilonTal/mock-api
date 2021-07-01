@@ -45,9 +45,9 @@ func createTest(w http.ResponseWriter, r *http.Request) {
 	mutex.Lock()
 	settings := &MockConfig{
 		ID:                   testUUID,
-		PostResponseStatus:   gjson.GetBytes(b, postResponseStatus).Int(),
-		PostResponseBody:     gjson.GetBytes(b, postResponseBody).Value(),
-		DeleteResponseStatus: gjson.GetBytes(b, deleteResponseStatus).Int(),
+		PostResponseStatus:   gjson.GetBytes(b, PostResponseStatusKey).Int(),
+		PostResponseBody:     gjson.GetBytes(b, PostResponseBodyKey).Value(),
+		DeleteResponseStatus: gjson.GetBytes(b, DeleteResponseStatusKey).Int(),
 	}
 	tests[testUUID] = settings
 	mutex.Unlock()

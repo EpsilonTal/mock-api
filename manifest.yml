@@ -1,4 +1,4 @@
 ---
 applications:
-  - name: sm-fake-callback-client
+  - name: mock-api
     memory: 100M
