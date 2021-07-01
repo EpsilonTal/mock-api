@@ -8,12 +8,15 @@ Replace the endpoint in the code and you are ready. It's that simple!
         + [Request](#request)
         + [Response](#response)
             - [Created 201](#created-201)
-    * [Delete A Mock API](#delete-a-mock-api)
+    * [Get a Mock API config](#get-a-mock-api-config)
         + [Request](#request-1)
+    * [Delete A Mock API config](#delete-a-mock-api-config)
+        + [Request](#request-2)
         + [Response](#response-1)
-    * [How to use](#how-to-use)
+    * [How to use your mock config](#how-to-use-your-mock-config)
         + [Post Request](#post-request)
         + [Post Response](#post-response)
+        + [Delete Request](#delete-request)
     
 ## Installation and Setup
 1. Clone the project
