@@ -58,17 +58,37 @@ func createTest(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	mutex.Lock()
-	settings := &utils.MockConfig{
-		ID:                   testUUID,
-		PostResponseStatus:   gjson.GetBytes(b, utils.PostResponseStatusKey).Int(),
-		PostResponseBody:     gjson.GetBytes(b, utils.PostResponseBodyKey).Value(),
-		DeleteResponseStatus: gjson.GetBytes(b, utils.DeleteResponseStatusKey).Int(),
+	reqPostSettings, err := setMethodSettings(b, utils.PostKey)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
 	}
+	reqDeleteSettings, err := setMethodSettings(b, utils.DeleteKey)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+	settings := &utils.MockConfig{
+		ID:     testUUID,
+		Post:   reqPostSettings,
+		Delete: reqDeleteSettings,
+	}
+	mutex.Lock()
 	tests[testUUID] = settings
 	mutex.Unlock()
 	log.Printf("Creating a test with ID: %s", testUUID)
 	utils.GenerateResponse(w, 201, tests[testUUID])
+}
+
+func setMethodSettings(b []byte, key string) (utils.MethodConfig, error) {
+	value := []byte(gjson.GetBytes(b, key).Raw)
+	// Unmarshal
+	var methodConfig utils.MethodConfig
+	err := json.Unmarshal(value, &methodConfig)
+	if err != nil {
+		return utils.MethodConfig{}, err
+	}
+	return methodConfig, err
 }
 
 func updateTest(w http.ResponseWriter, r *http.Request) {
@@ -90,13 +110,22 @@ func updateTest(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	mutex.Lock()
-	settings := &utils.MockConfig{
-		ID:                   testUUID,
-		PostResponseStatus:   gjson.GetBytes(b, utils.PostResponseStatusKey).Int(),
-		PostResponseBody:     gjson.GetBytes(b, utils.PostResponseBodyKey).Value(),
-		DeleteResponseStatus: gjson.GetBytes(b, utils.DeleteResponseStatusKey).Int(),
+	reqPostSettings, err := setMethodSettings(b, utils.PostKey)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
 	}
+	reqDeleteSettings, err := setMethodSettings(b, utils.DeleteKey)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+	settings := &utils.MockConfig{
+		ID:     testUUID,
+		Post:   reqPostSettings,
+		Delete: reqDeleteSettings,
+	}
+	mutex.Lock()
 	tests[testUUID] = settings
 	mutex.Unlock()
 	log.Printf("Updating a test with ID: %s", testUUID)

@@ -1,8 +1,12 @@
 package utils
 
 type MockConfig struct {
-	ID                   string      `json:"id"`
-	PostResponseStatus   int64       `json:"postResponseStatus"`
-	PostResponseBody     interface{} `json:"postResponseBody"`
-	DeleteResponseStatus int64       `json:"deleteResponseStatus"`
+	ID     string       `json:"id"`
+	Post   MethodConfig `json:"post"`
+	Delete MethodConfig `json:"delete"`
+}
+
+type MethodConfig struct {
+	Status int64       `json:"status"`
+	Body   interface{} `json:"body"`
 }

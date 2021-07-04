@@ -20,10 +20,10 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 func handlePost(w http.ResponseWriter, r *http.Request) {
 	testUUID := r.URL.Query().Get(utils.IDKey)
-	w = utils.GenerateResponse(w, int(tests[testUUID].PostResponseStatus), tests[testUUID].PostResponseBody)
+	w = utils.GenerateResponse(w, int(tests[testUUID].Post.Status), tests[testUUID].Post.Body)
 }
 
 func handleDelete(w http.ResponseWriter, r *http.Request) {
 	testUUID := r.URL.Query().Get(utils.IDKey)
-	w = utils.GenerateResponse(w, int(tests[testUUID].DeleteResponseStatus), nil)
+	w = utils.GenerateResponse(w, int(tests[testUUID].Delete.Status), nil)
 }
