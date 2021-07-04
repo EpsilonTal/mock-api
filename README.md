@@ -2,21 +2,22 @@
 Rest API mocking and intercepting in seconds.
 Replace the endpoint in the code and you are ready. It's that simple!
 
-- [Mock API](#mock-api)
-    * [Installation and Setup](#installation-and-setup)
-    * [Build A Mock API](#build-a-mock-api)
-        + [Request](#request)
-        + [Response](#response)
-            - [Created 201](#created-201)
-    * [Get a Mock API config](#get-a-mock-api-config)
-        + [Request](#request-1)
-    * [Delete A Mock API config](#delete-a-mock-api-config)
-        + [Request](#request-2)
-        + [Response](#response-1)
-    * [How to use your mock config](#how-to-use-your-mock-config)
-        + [Post Request](#post-request)
-        + [Post Response](#post-response)
-        + [Delete Request](#delete-request)
+- [Installation and Setup](#installation-and-setup)
+- [Create A Mock API](#create-a-mock-api)
+    * [Request](#request)
+    * [Response](#response)
+        + [Created 201](#created-201)
+- [Read a Mock API config](#read-a-mock-api-config)
+    * [Request](#request-1)
+- [Update a Mock API Config](#update-a-mock-api-config)
+    * [Patch Request](#patch-request)
+- [Delete A Mock API config](#delete-a-mock-api-config)
+    * [Request](#request-2)
+    * [Response](#response-1)
+- [How to use your mock config](#how-to-use-your-mock-config)
+    * [Post Request](#post-request)
+    * [Post Response](#post-response)
+    * [Delete Request](#delete-request)
     
 ## Installation and Setup
 1. Clone the project
@@ -26,7 +27,7 @@ The project contains a manifest.yaml file for cloud-foundry users.
 1. Login to your cloud-foundry org and space.
 2. Execute `cf push` from the repository directory.
 
-## Build A Mock API
+## Create A Mock API
 
 When your mock-api application is running, you can start using it and set up a new config.
 
@@ -64,7 +65,7 @@ The request body should contain the following JSON template:
 - `deleteResponseStatus` - (int64)  the expected response status of your `delete` requests
 - `postResponseBody` - the expected response body of your `post` requests (can be a json format)
 
-## Get a Mock API config
+## Read a Mock API config
 
 ### Request
 `GET` request to `https://<host>/mockConfig?id=<uuid>`
@@ -77,6 +78,27 @@ You can get all configurations in your app memory using the `all=true` flag.
 Example:
 `GET` request to `https://<host>/mockConfig?all=true`
 
+## Update a Mock API Config
+After creating a mock api config, you can change its settings.
+
+This can be used when running a dynamic test that its configurations need to be changed on runtime.
+
+### Patch Request
+- `PATCH` request to `https://<host>/?id=<uuid>`
+- `id` - (uuid) the unique id of your config, which received on the `Build A Mock API` step
+  The request body should contain the following JSON template:
+```json
+{
+    "postResponseStatus": 201,
+    "deleteResponseStatus": 200,
+    "postResponseBody": {
+        "name": "tal.yaakov@sap.com"
+    }
+}
+```
+- `postResponseStatus` - (int64) the expected response status of your `post` requests
+- `deleteResponseStatus` - (int64)  the expected response status of your `delete` requests
+- `postResponseBody` - the expected response body of your `post` requests (can be a json format)
 
 ## Delete A Mock API config
 When finishing with the mock api config, remember to delete it in order to avoid overloading your application in-memory.
@@ -99,7 +121,7 @@ Example:
 
 ### Post Request
 - `POST` request to `https://<host>/?id=<uuid>`
-- `id` - (uuid) the unique id of your config, which recieved on the `Build A Mock API` step
+- `id` - (uuid) the unique id of your config, which received on the `Build A Mock API` step
 
 ### Post Response
 - `Status Code`: should be as defined eralier.
@@ -111,4 +133,4 @@ Example:
 ```
 ### Delete Request
 - `DELETE` request to `https://<host>/?id=<uuid>`
-- `id` - (uuid) the unique id of your config, which recieved on the `Build A Mock API` step.
+- `id` - (uuid) the unique id of your config, which received on the `Build A Mock API` step.
