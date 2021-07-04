@@ -23,6 +23,9 @@ func setup(w http.ResponseWriter, r *http.Request) {
 			getSingleTest(w, r)
 		}
 		return
+	case "PATCH":
+		updateTest(w, r)
+		return
 	case "DELETE":
 		deleteAll := r.URL.Query().Get(utils.AllKey)
 		if deleteAll == "true" {
@@ -66,6 +69,38 @@ func createTest(w http.ResponseWriter, r *http.Request) {
 	mutex.Unlock()
 	log.Printf("Creating a test with ID: %s", testUUID)
 	utils.GenerateResponse(w, 201, tests[testUUID])
+}
+
+func updateTest(w http.ResponseWriter, r *http.Request) {
+	testUUID := r.URL.Query().Get(utils.IDKey)
+
+	// Read body
+	b, err := ioutil.ReadAll(r.Body)
+	defer r.Body.Close()
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	// Unmarshal
+	var reqTestSettings utils.MockConfig
+	err = json.Unmarshal(b, &reqTestSettings)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	mutex.Lock()
+	settings := &utils.MockConfig{
+		ID:                   testUUID,
+		PostResponseStatus:   gjson.GetBytes(b, utils.PostResponseStatusKey).Int(),
+		PostResponseBody:     gjson.GetBytes(b, utils.PostResponseBodyKey).Value(),
+		DeleteResponseStatus: gjson.GetBytes(b, utils.DeleteResponseStatusKey).Int(),
+	}
+	tests[testUUID] = settings
+	mutex.Unlock()
+	log.Printf("Updating a test with ID: %s", testUUID)
+	utils.GenerateResponse(w, 200, tests[testUUID])
 }
 
 func getSingleTest(w http.ResponseWriter, r *http.Request) {
