@@ -68,10 +68,16 @@ func createTest(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), 400)
 		return
 	}
+	reqPatchSettings, err := setMethodSettings(b, utils.PatchKey)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
 	settings := &utils.MockConfig{
 		ID:     testUUID,
 		Post:   reqPostSettings,
 		Delete: reqDeleteSettings,
+		Patch:  reqPatchSettings,
 	}
 	mutex.Lock()
 	tests[testUUID] = settings
@@ -120,10 +126,16 @@ func updateTest(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), 400)
 		return
 	}
+	reqPatchSettings, err := setMethodSettings(b, utils.PatchKey)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
 	settings := &utils.MockConfig{
 		ID:     testUUID,
 		Post:   reqPostSettings,
 		Delete: reqDeleteSettings,
+		Patch:  reqPatchSettings,
 	}
 	mutex.Lock()
 	tests[testUUID] = settings

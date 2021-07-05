@@ -8,6 +8,7 @@ import (
 const (
 	PostKey   = "post"
 	DeleteKey = "delete"
+	PatchKey  = "patch"
 	StatusKey = "status"
 	BodyKey   = "body"
 	IDKey     = "id"

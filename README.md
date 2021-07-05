@@ -51,10 +51,16 @@ The request body should contain the following JSON template:
     "body": {
       "name": "tal.yaakov@sap.com"
     }
+  },
+  "patch": {
+    "status": 200,
+    "body": {
+      "key": "value"
+    }
   }
 }
 ```
-- `<method>` (`post`/`delete`) - (json object) contains the config (`status` and `body`) of the configured method.
+- `<method>` (`post`/`delete`/`patch`) - (json object) contains the config (`status` and `body`) of the configured method.
 - `status` - (int64) the expected response status of your `post`/`delete` requests
 - `body` - the expected response body of your `post`/`delete` requests (can be a json format)
 
@@ -76,12 +82,18 @@ The request body should contain the following JSON template:
     "body": {
       "name": "tal.yaakov@sap.com"
     }
+  },
+  "patch": {
+    "status": 200,
+    "body": {
+      "key": "value"
+    }
   }
 }
 ```
 
 - `id` - (uuid) the unique id of your config, will be used for mocking your requests to the client and for setup/delete
-- `<method>` (`post`/`delete`) - (json object) contains the config (`status` and `body`) of the configured method.
+- `<method>` (`post`/`delete`/`patch`) - (json object) contains the config (`status` and `body`) of the configured method.
 - `status` - (int64) the expected response status of your `post`/`delete` requests
 - `body` - the expected response body of your `post`/`delete` requests (can be a json format)
 
@@ -124,11 +136,17 @@ This can be used when running a dynamic test that its configurations need to be 
     "body": {
       "name": "tal.yaakov@sap.com"
     }
+  },
+  "patch": {
+    "status": 200,
+    "body": {
+      "key": "value"
+    }
   }
 }
 ```
 
-- `<method>` (`post`/`delete`) - (json object) contains the config (`status` and `body`) of the configured method.
+- `<method>` (`post`/`delete`/`patch`) - (json object) contains the config (`status` and `body`) of the configured method.
 - `status` - (int64) the expected response status of your `post`/`delete` requests
 - `body` - the expected response body of your `post`/`delete` requests (can be a json format)
 
