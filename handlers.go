@@ -7,6 +7,7 @@ import (
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
+	validateRequest(w, r)
 	switch r.Method {
 	case "POST":
 		handlePost(w, r)

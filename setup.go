@@ -5,12 +5,14 @@ import (
 	"github.com/google/uuid"
 	"github.com/tidwall/gjson"
 	"github.tools.sap/atom-cfs/mock-api/utils"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
 )
 
 func setup(w http.ResponseWriter, r *http.Request) {
+	validateRequest(w, r)
 	switch r.Method {
 	case "POST":
 		createTest(w, r)
@@ -36,6 +38,24 @@ func setup(w http.ResponseWriter, r *http.Request) {
 		}
 		utils.GenerateResponse(w, 200, nil)
 		return
+	}
+}
+
+func validateRequest(w http.ResponseWriter, r *http.Request) {
+	contentType := r.Header.Get("Content-Type")
+	if contentType != "application/json" {
+		utils.GenerateResponse(w, 400, nil)
+	}
+
+	var input interface{}
+	err := json.NewDecoder(r.Body).Decode(input)
+	switch {
+	case err == io.EOF:
+		// empty body
+		//utils.GenerateResponse(w, 400, nil)
+	case err != nil:
+		// other error
+		utils.GenerateResponse(w, 400, nil)
 	}
 }
 
