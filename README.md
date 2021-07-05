@@ -54,10 +54,9 @@ The request body should contain the following JSON template:
   }
 }
 ```
-
-- `postResponseStatus` - (int64) the expected response status of your `post` requests
-- `deleteResponseStatus` - (int64)  the expected response status of your `delete` requests
-- `postResponseBody` - the expected response body of your `post` requests (can be a json format)
+- `<method>` (`post`/`delete`) - (json object) contains the config (`status` and `body`) of the configured method.
+- `status` - (int64) the expected response status of your `post`/`delete` requests
+- `body` - the expected response body of your `post`/`delete` requests (can be a json format)
 
 ### Response
 
