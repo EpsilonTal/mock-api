@@ -4,20 +4,22 @@ Rest API mocking and intercepting in seconds. Replace the endpoint in the code a
 
 - [Installation and Setup](#installation-and-setup)
 - [Create A Mock API](#create-a-mock-api)
-    * [Request](#request)
-    * [Response](#response)
-        + [Created 201](#created-201)
+  * [Request](#request)
+  * [Response](#response)
+    + [Created 201](#created-201)
 - [Read a Mock API config](#read-a-mock-api-config)
-    * [Request](#request-1)
+  * [Request](#request-1)
 - [Update a Mock API Config](#update-a-mock-api-config)
-    * [Patch Request](#patch-request)
+  * [Patch Request](#patch-request)
+  * [Response](#response-1)
+    + [OK 200](#ok-200)
 - [Delete A Mock API config](#delete-a-mock-api-config)
-    * [Request](#request-2)
-    * [Response](#response-1)
+  * [Request](#request-2)
+  * [Response](#response-2)
 - [How to use your mock config](#how-to-use-your-mock-config)
-    * [Post Request](#post-request)
-    * [Post Response](#post-response)
-    * [Delete Request](#delete-request)
+  * [Post Request](#post-request)
+  * [Post Response](#post-response)
+  * [Delete Request](#delete-request)
 
 ## Installation and Setup
 
@@ -146,6 +148,39 @@ This can be used when running a dynamic test that its configurations need to be 
 }
 ```
 
+- `<method>` (`post`/`delete`/`patch`) - (json object) contains the config (`status` and `body`) of the configured method.
+- `status` - (int64) the expected response status of your `post`/`delete` requests
+- `body` - the expected response body of your `post`/`delete` requests (can be a json format)
+
+### Response
+
+#### OK 200
+
+```json
+{
+  "id": "32c079dc-a8e1-43d2-bbd0-cb3b2f18d3f8",
+  "post": {
+    "status": 201,
+    "body": {
+      "name": "tal.yaakov@sap.com"
+    }
+  },
+  "delete": {
+    "status": 200,
+    "body": {
+      "name": "tal.yaakov@sap.com"
+    }
+  },
+  "patch": {
+    "status": 200,
+    "body": {
+      "key": "value"
+    }
+  }
+}
+```
+
+- `id` - (uuid) the unique id of your config, will be used for mocking your requests to the client and for setup/delete
 - `<method>` (`post`/`delete`/`patch`) - (json object) contains the config (`status` and `body`) of the configured method.
 - `status` - (int64) the expected response status of your `post`/`delete` requests
 - `body` - the expected response body of your `post`/`delete` requests (can be a json format)
