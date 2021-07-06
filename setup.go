@@ -12,7 +12,6 @@ import (
 )
 
 func setup(w http.ResponseWriter, r *http.Request) {
-	validateRequest(w, r)
 	switch r.Method {
 	case "POST":
 		createTest(w, r)
@@ -108,6 +107,9 @@ func createTest(w http.ResponseWriter, r *http.Request) {
 
 func setMethodSettings(b []byte, key string) (utils.MethodConfig, error) {
 	value := []byte(gjson.GetBytes(b, key).Raw)
+	if len(value) == 0 {
+		return getDefaultMock(), nil
+	}
 	// Unmarshal
 	var methodConfig utils.MethodConfig
 	err := json.Unmarshal(value, &methodConfig)
@@ -115,6 +117,13 @@ func setMethodSettings(b []byte, key string) (utils.MethodConfig, error) {
 		return utils.MethodConfig{}, err
 	}
 	return methodConfig, err
+}
+
+func getDefaultMock() utils.MethodConfig {
+	return utils.MethodConfig{
+		Status: 200,
+		Body:   map[string]string{},
+	}
 }
 
 func updateTest(w http.ResponseWriter, r *http.Request) {
