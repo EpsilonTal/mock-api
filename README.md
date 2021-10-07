@@ -121,7 +121,7 @@ This can be used when running a dynamic test that its configurations need to be 
 
 ### Patch Request
 
-- `PATCH` request to `https://<host>/?id=<uuid>`
+- `PATCH` request to `https://<host>/mockConfig?id=<uuid>`
 - `id` - (uuid) the unique id of your config, which received on the `Build A Mock API` step The request body should
   contain the following JSON template:
 
