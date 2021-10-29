@@ -45,13 +45,13 @@ The request body should contain the following JSON template:
   "post": {
     "status": 201,
     "body": {
-      "name": "tal.yaakov@sap.com"
+      "name": "tal@epsilontal.com"
     }
   },
   "delete": {
     "status": 200,
     "body": {
-      "name": "tal.yaakov@sap.com"
+      "name": "tal@epsilontal.com"
     }
   },
   "patch": {
@@ -76,13 +76,13 @@ The request body should contain the following JSON template:
   "post": {
     "status": 201,
     "body": {
-      "name": "tal.yaakov@sap.com"
+      "name": "tal@epsilontal.com"
     }
   },
   "delete": {
     "status": 200,
     "body": {
-      "name": "tal.yaakov@sap.com"
+      "name": "tal@epsilontal.com"
     }
   },
   "patch": {
@@ -130,13 +130,13 @@ This can be used when running a dynamic test that its configurations need to be 
   "post": {
     "status": 201,
     "body": {
-      "name": "tal.yaakov@sap.com"
+      "name": "tal@epsilontal.com"
     }
   },
   "delete": {
     "status": 400,
     "body": {
-      "name": "tal.yaakov@sap.com"
+      "name": "tal@epsilontal.com"
     }
   },
   "patch": {
@@ -162,13 +162,13 @@ This can be used when running a dynamic test that its configurations need to be 
   "post": {
     "status": 201,
     "body": {
-      "name": "tal.yaakov@sap.com"
+      "name": "tal@epsilontal.com"
     }
   },
   "delete": {
     "status": 200,
     "body": {
-      "name": "tal.yaakov@sap.com"
+      "name": "tal@epsilontal.com"
     }
   },
   "patch": {
@@ -219,7 +219,7 @@ Example:
 
 ```json
 {
-  "name": "tal.yaakov@sap.com"
+  "name": "tal@epsilontal.com"
 }
 ```
 
